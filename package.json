@@ -9,12 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hapi/iron": "^7.0.1",
     "@types/node": "20.5.1",
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
+    "@types/cookie": "^0.5.1",
+    "@types/passport": "^1.0.12",
+    "@welldone-software/why-did-you-render": "^7.0.1",
+    "cookie": "^0.5.0",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.19",
     "next": "13.4.19",
+    "next-connect": "^1.0.0",
+    "openid-client": "^5.4.3",
+    "passport": "^0.6.0",
+    "passport-oauth2": "^1.7.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "5.1.6"
