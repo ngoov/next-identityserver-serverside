@@ -32,6 +32,6 @@ export default function session({ name, secret, cookie: cookieOpts }: {name: str
       ctx.cookies = [];
     ctx.cookies.push(cookie)
 
-    next()
+    return next()
   }
 }

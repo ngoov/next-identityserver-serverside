@@ -34,6 +34,7 @@ router
       };
       console.log('props', props)
     await session(props)(req, ctx, next) as any
+        return next()
 }
 
   )
@@ -42,17 +43,19 @@ router
     // Remove this after you add your own database
     console.log('initialize mocked db')
     req.session.users = req.session.users || []
-    next()
+    return next()
   })
-  .use(async () => {
+  .use(async (req, res, next) => {
     console.log('get oidc client')
     const oidcClient = await initializeOpenIdClient();
+    console.log('got client')
     var client = new oidcClient({
         client_id: 'm2m',
         client_secret: 'secret',
         redirect_uris: ['http://localhost:3000/login/callback'],
         response_types: ['code']
     });
+    console.log('client', client)
     passport.use('oidc', new Strategy({client, passReqToCallback: true}, (req, tokenSet, userInfo, done)=>
     {
         console.log("tokenSet",tokenSet);
@@ -63,6 +66,8 @@ router
         session.userinfo = userInfo;
         return done(null, tokenSet.claims());
     }));
+    console.log('after passport use oidc')
+    return next()
   })
   .use(passport.initialize() as any)
   .use(passport.session());
